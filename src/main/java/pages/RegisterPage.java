@@ -21,6 +21,10 @@ public class RegisterPage extends BasePage {
     private final By confirmPasswordField = By.id("regconfirmpassword");
     private final By registerButton = By.id("registerBtn");
     private final By successMessage = By.id("regsuccessMsg");
+    private final By firstNameError = By.id("regfnameerror");
+    private final By emailError = By.id("regemailerror");
+    private final By phoneError = By.id("regphoneerror");
+    private final By confirmPasswordError = By.id("regconfirmerror");
 
     public RegisterPage(WebDriver driver) {
         super(driver);
@@ -82,6 +86,12 @@ public class RegisterPage extends BasePage {
 
     public void registerAs(String firstName, String lastName, String email, String phone,
                            String gender, String isoDob, String country, String password) {
+        registerAs(firstName, lastName, email, phone, gender, isoDob, country, password, password);
+    }
+
+    public void registerAs(String firstName, String lastName, String email, String phone,
+                           String gender, String isoDob, String country,
+                           String password, String confirmPassword) {
         enterFirstName(firstName);
         enterLastName(lastName);
         enterEmail(email);
@@ -90,12 +100,28 @@ public class RegisterPage extends BasePage {
         selectDateOfBirth(isoDob);
         selectCountry(country);
         enterPassword(password);
-        enterConfirmPassword(password);
+        enterConfirmPassword(confirmPassword);
         clickRegister();
     }
 
     public String getSuccessMessage() {
         return getText(successMessage);
+    }
+
+    public String getFirstNameError() {
+        return getText(firstNameError);
+    }
+
+    public String getEmailError() {
+        return getText(emailError);
+    }
+
+    public String getPhoneError() {
+        return getText(phoneError);
+    }
+
+    public String getConfirmPasswordError() {
+        return getText(confirmPasswordError);
     }
 
     public boolean isLoginPageDisplayed() {
