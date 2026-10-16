@@ -3,14 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class LoginPage {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class LoginPage extends BasePage {
 
     private final By emailField = By.id("email");
     private final By passwordField = By.id("password");
@@ -19,27 +13,19 @@ public class LoginPage {
     private final By emailError = By.id("emailerror");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
 
     public void enterEmail(String email) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(emailField))
-                .clear();
-
-        driver.findElement(emailField).sendKeys(email);
+        sendData(emailField, email);
     }
 
     public void enterPassword(String password) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(passwordField))
-                .clear();
-
-        driver.findElement(passwordField).sendKeys(password);
+        sendData(passwordField, password);
     }
 
     public void clickLogin() {
-        wait.until(ExpectedConditions.elementToBeClickable(loginButton))
-                .click();
+        click(loginButton);
     }
 
     public void loginAs(String email, String password) {
@@ -49,20 +35,16 @@ public class LoginPage {
     }
 
     public String getErrorMessage() {
-        return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(errorMessage)
-        ).getText();
+        return getText(errorMessage);
     }
 
-    public String getEmailError(){
-        return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(emailError)
-        ).getText();
+    public String getEmailError() {
+        return getText(emailError);
     }
 
     public boolean isDashboardPageDisplayed() {
         return wait.until(
-                ExpectedConditions.urlContains("dashboard.php")
+                ExpectedConditions.urlContains("shop.php")
         );
     }
 }

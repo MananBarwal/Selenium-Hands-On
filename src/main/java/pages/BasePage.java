@@ -33,7 +33,7 @@ public abstract class BasePage {
         ).click();
     }
 
-    protected void type(By locator, String text) {
+    protected void sendData(By locator, String text) {
         WebElement element = find(locator);
         element.clear();
         element.sendKeys(text);

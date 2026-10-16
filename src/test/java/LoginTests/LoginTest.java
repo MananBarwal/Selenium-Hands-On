@@ -31,10 +31,10 @@ public class LoginTest extends UnauthenticatedBaseTest {
 
         loginPage.loginAs(VALID_EMAIL, VALID_PASSWORD);
 
-//        Assert.assertTrue(
-//                loginPage.isDashboardPageDisplayed(),
-//                "User should be redirected to dashboard.php after valid login."
-//        );
+        Assert.assertTrue(
+                loginPage.isDashboardPageDisplayed(),
+                "User should be redirected to dashboard.php after valid login."
+        );
     }
 
     @Test
