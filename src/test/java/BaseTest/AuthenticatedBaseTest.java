@@ -1,9 +1,10 @@
 package BaseTest;
 
 import org.testng.annotations.BeforeMethod;
+
 import utils.SessionManager;
 
-public abstract class AuthenticatedBaseTest extends base.BaseTest {
+public abstract class AuthenticatedBaseTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void restoreAuthenticatedSession() {
