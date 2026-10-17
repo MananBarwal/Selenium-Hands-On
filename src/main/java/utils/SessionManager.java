@@ -1,14 +1,13 @@
 package utils;
 
 import Driver.DriverManager;
-import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
-import java.util.Set;
 
 public final class SessionManager {
 
-    private static Set<Cookie> authenticationCookies;
+    private static boolean authenticated;
     private static final String BASE_URL = "https://shop.qaautomationlabs.com/";
     private static final String LOGIN_URL = "https://shop.qaautomationlabs.com/index.php";
     private static final String VALID_EMAIL = "demo@demo.com";
@@ -17,7 +16,7 @@ public final class SessionManager {
     private SessionManager() {}
 
     public static synchronized void createSession() {
-        if (authenticationCookies != null && !authenticationCookies.isEmpty()) {
+        if (authenticated) {
             return;
         }
 
@@ -28,11 +27,13 @@ public final class SessionManager {
             setupDriver.get(LOGIN_URL);
             LoginPage loginPage = new LoginPage(setupDriver);
             loginPage.loginAs(VALID_EMAIL, VALID_PASSWORD);
-            authenticationCookies = setupDriver.manage().getCookies();
-            if (authenticationCookies.isEmpty()) {
+            String isLoggedIn = (String) ((JavascriptExecutor) setupDriver)
+                    .executeScript("return window.localStorage.getItem('isLoggedIn');");
+            if (!"true".equals(isLoggedIn)) {
                 throw new RuntimeException(
-                        "Login appeared successful, but no cookies were captured.");
+                        "Login appeared successful, but the authenticated session was not established.");
             }
+            authenticated = true;
         } finally {
             setupDriver.quit();
         }
@@ -43,9 +44,9 @@ public final class SessionManager {
         createSession();
         driver.get(BASE_URL);
         driver.manage().deleteAllCookies();
-        for (Cookie cookie : authenticationCookies) {
-            driver.manage().addCookie(cookie);
-        }
+        ((JavascriptExecutor) driver).executeScript(
+                "window.localStorage.setItem('isLoggedIn', 'true');"
+        );
         driver.navigate().refresh();
     }
 }

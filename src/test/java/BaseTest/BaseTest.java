@@ -1,11 +1,12 @@
-package base;
+package BaseTest;
 
-import Driver.DriverManager;
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.time.Duration;
+import Driver.DriverManager;
 
 public class BaseTest {
 
