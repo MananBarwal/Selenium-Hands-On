@@ -1,7 +1,12 @@
 package ProductTests;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import net.bytebuddy.dynamic.scaffold.TypeInitializer;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -103,6 +108,51 @@ public class MensWearTest extends AuthenticatedBaseTest {
 
         List<WebElement> productPrices = mensWearPage.getDisplayedProductPrices();
         assertPricesSorted(productPrices, false);
+    }
+
+    @Test
+    public void sortAtoZ() {
+        MensWearPage mensWearPage = new MensWearPage(driver);
+
+        mensWearPage.open();
+        mensWearPage.sortAtoZ();
+
+        List<String> productNames = mensWearPage.getDisplayedProductNames();
+        assertNamesSorted(productNames, true);
+    }
+
+    @Test
+    public void sortZtoA(){
+        MensWearPage mensWearPage = new MensWearPage(driver);
+
+        mensWearPage.open();
+        mensWearPage.sortZtoA();
+
+        List<String> productNames = mensWearPage.getDisplayedProductNames();
+        assertNamesSorted(productNames, false);
+    }
+
+    private void assertNamesSorted(List<String> productNames, boolean AtoZ ){
+        Assert.assertFalse(
+                productNames.isEmpty(),
+                "Sorted Products are not displayed"
+        );
+
+        List<String> sortedList;
+        if(AtoZ){
+            sortedList = productNames
+                    .stream()
+                    .sorted()
+                    .collect(Collectors.toList());
+        }
+        else {
+            sortedList = productNames
+                    .stream()
+                    .sorted(Comparator.reverseOrder())
+                    .collect(Collectors.toList());
+        }
+
+        Assert.assertEquals(sortedList, productNames, "Sorting has failed in case " + (AtoZ ? "A to Z" : "Z to A"));
     }
 
     private void assertPricesSorted(List<WebElement> productPrices, boolean ascending) {

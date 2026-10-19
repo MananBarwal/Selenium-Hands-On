@@ -1,5 +1,6 @@
 package pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -23,6 +24,8 @@ public class MensWearPage extends BasePage {
             By.cssSelector("[data-testid^='product-meta-']");
     private static final By PRODUCT_LIST =
             By.cssSelector("[data-testid='product-list']");
+    private static final By PRODUCT_NAME =
+            By.cssSelector("[data-testid^='product-name-']");
 
     public MensWearPage(WebDriver driver) {
         super(driver);
@@ -52,6 +55,14 @@ public class MensWearPage extends BasePage {
         selectSortOption("price-desc");
     }
 
+    public void sortAtoZ() {
+        selectSortOption("name-asc");
+    }
+
+    public void sortZtoA() {
+        selectSortOption("name-desc");
+    }
+
     private void selectSortOption(String value) {
         driver.findElement(SORT_SELECT)
                 .findElement(By.cssSelector("option[value='" + value + "']"))
@@ -67,4 +78,17 @@ public class MensWearPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_LIST));
         return driver.findElements(PRODUCT_METADATA);
     }
+
+    public List<String> getDisplayedProductNames() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_LIST));
+        List<WebElement> elements = driver.findElements(PRODUCT_NAME);
+        List<String> finElements = new ArrayList<>();
+
+        for(WebElement element:elements){
+            finElements.add(element.getText());
+        }
+
+        return finElements;
+    }
+
 }
