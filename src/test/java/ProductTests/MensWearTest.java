@@ -120,7 +120,6 @@ public class MensWearTest extends AuthenticatedBaseTest {
         List<String> productNames = mensWearPage.getDisplayedProductNames();
         assertNamesSorted(productNames, true);
     }
-
     @Test
     public void sortZtoA(){
         MensWearPage mensWearPage = new MensWearPage(driver);
