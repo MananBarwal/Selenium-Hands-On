@@ -5,17 +5,31 @@ import org.openqa.selenium.WebDriver;
 
 public final class SessionManager {
 
-    private static final String BASE_URL = "https://shop.qaautomationlabs.com/";
+    private static final String BASE_URL =
+            "https://shop.qaautomationlabs.com/";
 
-    private SessionManager() {}
+    private static final String SHOP_URL =
+            "https://shop.qaautomationlabs.com/shop.php";
 
-    /**
-     * The application tracks the logged-in state with the "isLoggedIn" localStorage flag
-     * (no cookies are involved), so the session is restored by setting that flag.
-     */
+    private SessionManager() {
+    }
+
     public static void applySession(WebDriver driver) {
+        // Open application domain before accessing localStorage.
         driver.get(BASE_URL);
-        ((JavascriptExecutor) driver)
-                .executeScript("window.localStorage.setItem('isLoggedIn', 'true');");
+
+        driver.manage().deleteAllCookies();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        js.executeScript("window.localStorage.clear();");
+        js.executeScript("window.sessionStorage.clear();");
+
+        js.executeScript(
+                "window.localStorage.setItem('isLoggedIn', 'true');"
+        );
+
+        // Open the authenticated dashboard/shop page.
+        driver.get(SHOP_URL);
     }
 }

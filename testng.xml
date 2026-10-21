@@ -7,7 +7,7 @@
         <classes>
             <class name="RegistrationTests.RegistrationTest"/>
             <class name="LoginTests.LoginTest"/>
-            <class name = "ShopTests.ShopCategoryTest"/>
+            <class name ="ShopTests.ShopCategoryTest"/>
             <class name="ProductTests.ProductSearchTest"/>
             <class name="ProductTests.MensWearTest"/>
             <class name="CartTests.CartTest"/>
