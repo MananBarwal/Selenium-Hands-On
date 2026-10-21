@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ShopPage_Shantu extends BasePage {
+public class ShopWear extends BasePage {
 
     private static final String SHOP_URL = "https://shop.qaautomationlabs.com/shop.php";
 
@@ -13,11 +13,11 @@ public class ShopPage_Shantu extends BasePage {
     private final By kidsWearButton = By.cssSelector("[data-testid='shop-now-kids-wear']");
     private final By electronicsButton = By.cssSelector("[data-testid='shop-now-electronics']");
 
-    public ShopPage_Shantu(WebDriver driver) {
+    public ShopWear(WebDriver driver) {
         super(driver);
     }
 
-    public ShopPage_Shantu open() {
+    public ShopWear open() {
         driver.get(SHOP_URL);
         return this;
     }
