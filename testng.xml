@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MiniProject-Selenium" verbose="1" preserve-order="true">
+    <!-- Classes run in the order listed. Each test still creates its own driver
+         and session, so tests remain independent. -->
+    <test name="Shop E2E" preserve-order="true">
+        <classes>
+            <class name="RegistrationTests.RegistrationTest"/>
+            <class name="LoginTests.LoginTest"/>
+            <class name="ProductTests.ProductSearchTest"/>
+            <class name="ProductTests.MensWearTest"/>
+            <class name="CartTests.CartTest"/>
+            <class name="CheckoutTests.CheckoutTest"/>
+            <class name="UIandResponsiveTests.UIandResponsiveTest"/>
+        </classes>
+    </test>
+</suite>

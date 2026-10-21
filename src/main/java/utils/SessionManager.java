@@ -11,8 +11,7 @@ public final class SessionManager {
     private static final String SHOP_URL =
             "https://shop.qaautomationlabs.com/shop.php";
 
-    private SessionManager() {
-    }
+    private SessionManager() {}
 
     public static void applySession(WebDriver driver) {
         // Open application domain before accessing localStorage.
