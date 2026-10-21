@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -41,5 +42,23 @@ public abstract class BasePage {
 
     protected String getText(By locator) {
         return find(locator).getText();
+    }
+
+    protected boolean isDisplayed(By locator) {
+        return find(locator).isDisplayed();
+    }
+
+    protected void waitForUrlContains(String expectedUrlText) {
+        wait.until(
+                ExpectedConditions.urlContains(expectedUrlText)
+        );
+    }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+    protected Object executeJavaScript(String script) {
+        return ((JavascriptExecutor) driver).executeScript(script);
     }
 }

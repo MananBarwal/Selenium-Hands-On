@@ -35,19 +35,19 @@ public class RegisterPage extends BasePage {
     }
 
     public void enterFirstName(String firstName) {
-        type(firstNameField, firstName);
+        sendData(firstNameField, firstName);
     }
 
     public void enterLastName(String lastName) {
-        type(lastNameField, lastName);
+        sendData(lastNameField, lastName);
     }
 
     public void enterEmail(String email) {
-        type(emailField, email);
+        sendData(emailField, email);
     }
 
     public void enterPhone(String phone) {
-        type(phoneField, phone);
+        sendData(phoneField, phone);
     }
 
     public void selectGender(String gender) {
@@ -73,11 +73,11 @@ public class RegisterPage extends BasePage {
     }
 
     public void enterPassword(String password) {
-        type(passwordField, password);
+        sendData(passwordField, password);
     }
 
     public void enterConfirmPassword(String confirmPassword) {
-        type(confirmPasswordField, confirmPassword);
+        sendData(confirmPasswordField, confirmPassword);
     }
 
     public void clickRegister() {
