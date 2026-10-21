@@ -32,10 +32,10 @@ public class CategoryPage extends BasePage {
         return getText(breadcrumbCurrent);
     }
 
-    public ShopPage clickGoBack() {
+    public ShopPage_Shantu clickGoBack() {
 
         click(goBackButton);
-        return new ShopPage(driver);
+        return new ShopPage_Shantu(driver);
     }
 
 }

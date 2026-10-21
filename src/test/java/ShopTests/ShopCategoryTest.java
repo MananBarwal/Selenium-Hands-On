@@ -4,13 +4,13 @@ import BaseTest.AuthenticatedBaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CategoryPage;
-import pages.ShopPage;
+import pages.ShopPage_Shantu;
 
 public class ShopCategoryTest extends AuthenticatedBaseTest {
 
     @Test
     public void mensWearPageLoadsFromShop() {
-        ShopPage shopPage = new ShopPage(driver).open();
+        ShopPage_Shantu shopPage = new ShopPage_Shantu(driver).open();
 
         CategoryPage categoryPage = shopPage.clickMensWear();
 
@@ -27,7 +27,7 @@ public class ShopCategoryTest extends AuthenticatedBaseTest {
 
     @Test
     public void womensWearPageLoadsFromShop() {
-        ShopPage shopPage = new ShopPage(driver).open();
+        ShopPage_Shantu shopPage = new ShopPage_Shantu(driver).open();
 
         CategoryPage categoryPage = shopPage.clickWomensWear();
 
@@ -44,7 +44,7 @@ public class ShopCategoryTest extends AuthenticatedBaseTest {
 
     @Test
     public void kidsWearPageLoadsFromShop() {
-        ShopPage shopPage = new ShopPage(driver).open();
+        ShopPage_Shantu shopPage = new ShopPage_Shantu(driver).open();
 
         CategoryPage categoryPage = shopPage.clickKidsWear();
 
@@ -61,7 +61,7 @@ public class ShopCategoryTest extends AuthenticatedBaseTest {
 
     @Test
     public void electronicsPageLoadsFromShop() {
-        ShopPage shopPage = new ShopPage(driver).open();
+        ShopPage_Shantu shopPage = new ShopPage_Shantu(driver).open();
 
         CategoryPage categoryPage = shopPage.clickElectronics();
 
@@ -80,7 +80,7 @@ public class ShopCategoryTest extends AuthenticatedBaseTest {
     public void goToBackFromMensWearNavigatesToShop() {
         CategoryPage categoryPage = new CategoryPage(driver).openMensWear();
 
-        ShopPage shopPage = categoryPage.clickGoBack();
+        ShopPage_Shantu shopPage = categoryPage.clickGoBack();
 
         Assert.assertTrue(
                 shopPage.isShopPageDisplayed(),
