@@ -1,5 +1,6 @@
 package pages;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +27,14 @@ public class ShoppingCartPage extends BasePage {
             By.cssSelector("[data-testid='header-cart-count']");
     private static final By CART_INC =
             By.cssSelector("[data-testid^='cart-qty-']");
+    private static final By CART_ICON =
+            By.id("cartdesk");
+
+    private static final By CHECKOUT_BUTTON =
+            By.id("checkoutBtn");
+
+    private static final By TOTAL_PRICE =
+            By.id("totalPrice");
 
     public ShoppingCartPage(WebDriver driver) {
         super(driver);
@@ -53,6 +62,18 @@ public class ShoppingCartPage extends BasePage {
 
     public void addFirstToCart(boolean checkCart){
         addToCart(1,checkCart);
+    }
+
+    public void addProductToCart(String productId) {
+        By productButton = By.cssSelector(
+                "[data-testid='add-to-cart-" + productId + "']"
+        );
+
+        click(productButton);
+    }
+
+    public void openCartFromHeader() {
+        click(CART_ICON);
     }
 
     public int cartIconCount(){
@@ -92,6 +113,22 @@ public class ShoppingCartPage extends BasePage {
         } else {
             return -1;
         }
+    }
+
+    public String getCartItemName(String productId) {
+        By itemName = By.cssSelector(
+                "[data-testid='cart-item-name-" + productId + "']"
+        );
+
+        return getText(itemName);
+    }
+
+    public String getTotalPrice() {
+        return getText(TOTAL_PRICE);
+    }
+
+    public void proceedToCheckout() {
+        click(CHECKOUT_BUTTON);
     }
 
 }
